@@ -7,7 +7,7 @@ int main()
 {
 	std::string name;
 	std::cout << "Input name\n";
-	std::cin >> name;
+	std::getline(std::cin, name);
 	capitalizeWords(name);
 
 	int age;
@@ -25,9 +25,10 @@ char toLower(char myChar)
 {
 	return myChar >= 'A' && myChar <= 'Z' ? myChar - 'A' + 'a' : myChar;
 }
+
 bool isWordDelimiter(char myChar)
 {
-	char wordDelimiters[] = "'\",.:()[]<>\\/";
+	char wordDelimiters[] = " \t'\",.:()[]<>\\/";
 	for (char ch : wordDelimiters) {
 		if (ch == myChar) {
 			return true;
@@ -35,6 +36,7 @@ bool isWordDelimiter(char myChar)
 	}
 	return false;
 }
+
 void capitalizeWords(std::string& myString)
 {
 	int length = myString.length();
