@@ -4,7 +4,7 @@
 void capitalizeWords(std::string& myString);
 class Individual
 {
-	protected:
+	private:
 		std::string name;
 		int age;
 	public:
