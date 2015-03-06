@@ -13,7 +13,19 @@ class Individual
 		std::string getName() { return name; }
 		void setAge(int num) { age = num; }
 		int getAge() { return age; }
+
+		void operator>>(std::string stdString) { setName(stdString); }
+		void operator>>(char *cStyleString) { setName(cStyleString); }
+		void operator>>(int num) { setAge(num); }
+		friend std::ostream& operator<<(std::ostream& strm, Individual& ind);
 };
+
+std::ostream& operator<<(std::ostream& strm, Individual& ind) {
+	strm << "Name: " << ind.getName() << "\nAge:   " << ind.getAge() << std::endl; 
+	return strm; 
+}
+
+
 
 int stringToInt(std::string str)
 {
@@ -66,8 +78,9 @@ int main()
 
 	for (int j = 0; j <= i; ++j) {
 		std::cout << "----person n" << j + 1 << "----\n";
-		std::cout << persons[j].getName() << '\n';
-		std::cout << persons[j].getAge() << " years old" << std::endl;
+		std::cout << persons[j];
+		//std::cout << persons[j].getName() << '\n';
+		//std::cout << persons[j].getAge() << " years old" << std::endl;
 	}
 }
 
