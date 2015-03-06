@@ -14,12 +14,21 @@ class Individual
 		void setAge(int num) { age = num; }
 		int getAge() { return age; }
 
-		void operator>>(std::string stdString) { setName(stdString); }
-		void operator>>(char *cStyleString) { setName(cStyleString); }
-		void operator>>(int num) { setAge(num); }
+		friend void operator>>(std::string str, Individual &ind);
+		friend void operator>>(char *str, Individual &ind);
+		friend void operator>>(int num, Individual &ind);
 		friend std::ostream& operator<<(std::ostream& strm, Individual& ind);
 };
 
+void operator>>(std::string str, Individual &ind) {
+	ind.setName(str);
+}
+void operator>>(char *str, Individual &ind) {
+	ind.setName(str);
+}
+void operator>>(int num, Individual &ind) {
+	ind.setAge(num);
+}
 std::ostream& operator<<(std::ostream& strm, Individual& ind) {
 	strm << "Name: " << ind.getName() << "\nAge:   " << ind.getAge() << std::endl; 
 	return strm; 
@@ -34,7 +43,6 @@ int stringToInt(std::string str)
 	for (int i = 0; i < strL && (str[i] >= '0' && str[i] <= '9'); ++i) {
 		num = num*10 + str[i] - '0';
 	}
-	std::cerr << "NUM: " << num << '\n'; //DEBUG
 	return num;
 }
 
@@ -59,7 +67,7 @@ int main()
 		if (isQuitMsg(input)) {
 			--i; break;
 		} else {
-			persons[i].setName(input);
+			input >> persons[i];
 		}
 
 		std::cout << "age: ";
@@ -69,7 +77,7 @@ int main()
 		} else {
 			age = stringToInt(input);
 			if (age >= 0 && age <= 199) {
-				persons[i].setAge(age);
+				stringToInt(input) >> persons[i];
 			} else {
 				std::cerr << "Invalid age: " << age << std::endl;
 			}
