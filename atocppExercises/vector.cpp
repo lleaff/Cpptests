@@ -11,10 +11,28 @@ void printVector(std::vector<T> vect)
 	}
 }
 
+bool compInt(int el1, int el2)
+{
+	return (el1 < el2);
+}
+bool compString(std::string el1, std::string el2)
+{
+	return (el1 < el2);
+}
+
 int main()
 {
 	using namespace std;
-	vector<int> myVector = { 5, 9, -1, 200, 0 };
-	printVector(myVector);
-	sort(myVector.begin(), myVector.end(), myVector);
+	vector<int> intVect = { 5, 9, -1, 200, 0 };
+	printVector(intVect); cout << "\n";
+	cout << "...sort...\n";
+	sort(intVect.begin(), intVect.end(), compInt);
+	printVector(intVect); cout << "\n";
+
+	cout << "\n";
+	vector<string> strVect = { "Kant", "Plato", "Aristotle", "Kierkegard", "Hume" };
+	printVector(strVect); cout << "\n";
+	sort(strVect.begin(), strVect.end(), compString);
+	printVector(strVect); cout << "\n";
+
 }
