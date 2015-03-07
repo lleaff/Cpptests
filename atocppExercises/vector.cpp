@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 template<typename T> 
 void printVector(std::vector<T> vect)
@@ -15,4 +16,5 @@ int main()
 	using namespace std;
 	vector<int> myVector = { 5, 9, -1, 200, 0 };
 	printVector(myVector);
+	sort(myVector.begin(), myVector.end(), myVector);
 }
