@@ -32,6 +32,7 @@ int main()
 	cout << "\n";
 	vector<string> strVect = { "Kant", "Plato", "Aristotle", "Kierkegard", "Hume" };
 	printVector(strVect); cout << "\n";
+	cout << "...sort...\n";
 	sort(strVect.begin(), strVect.end(), compString);
 	printVector(strVect); cout << "\n";
 
