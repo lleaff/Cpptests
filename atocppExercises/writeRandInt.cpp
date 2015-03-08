@@ -42,7 +42,9 @@ int strToInt(char* str)
 	return num;
 }
 
-int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* filename);
+static inline int getNextArgToInt(char arg, int& myVar, int& iterator, int argc, char** argv, int& flag);
+
+int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* filename)
 {
 	for (int i = 1; i < argc; ++i) {
 		if (argv[i][0] != '-') { //Filename
@@ -52,19 +54,13 @@ int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* fil
 				for (int j = 1, newargseries = 0; argv[i][j] != '\0' && !newargseries; ++j) {
 					switch (argv[i][j]) {
 						case 'n':
-							if (++i >= argc) {
-								std::cerr << "error: -n option requires an integer argument." << std::endl;
-								newargseries = true;
-							} else {
-								if (isInt(argv[i])) {
-									elC = strToInt(argv[i]);
-								} else {
-									std::cerr << "error: invalid argument to -n option \"" << argv[i]
-										<< "\", must be an integer number." << std::endl;
-								}
-								newargseries = true;
-							}
+							getNextArgToInt('n', elC, i, argc, argv, newargseries);
 							break;
+						case 'l':
+							getNextArgToInt('l', lower, i, argc, argv, newargseries);
+							break;
+						case 'u':
+							getNextArgToInt('u', upper, i, argc, argv, newargseries);
 						default:
 							std::cerr << "error: '" << argv[i][j] << "' unrecognized argument." << std::endl;
 							break;
@@ -76,4 +72,20 @@ int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* fil
 		}
 	}
 	return argc - 1;
+}
+
+
+static inline int getNextArgToInt(char arg, int& myVar, int& iterator, int argc, char** argv, int& flag) {
+	if (++iterator >= argc) {
+		std::cerr << "error: -" << arg << " option requires an integer argument." << std::endl;
+		flag = true;
+	} else {
+		if (isInt(argv[iterator])) {
+			myVar = strToInt(argv[iterator]);
+		} else {
+			std::cerr << "error: invalid argument to -" << arg << "n option \"" << argv[iterator]
+				<< "\", must be an integer number." << std::endl;
+		}
+		flag = true;
+	}
 }
