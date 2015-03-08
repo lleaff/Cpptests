@@ -1,14 +1,22 @@
 #include <iostream>
+#include <fstream>
 #include <string.h>
 
-int parseArgs(int argc, char** argv, int& elC, char* filename);
+int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* filename);
+void writeRandIntsToFile(std::ofstream myFile, int elC, int lower, int upper);
 
 int main(int argc, char** argv)
 {
 	int elC = 100; // Default number of elements to write
+	int lower = 0, upper = INT_MAX;
 #define MAXFILENAMESIZE 100
 	char filename[MAXFILENAMESIZE];
-	parseArgs(argc, argv, elC, filename);
+	parseArgs(argc, argv, elC, lower, upper, filename);
+
+	std::ofstream myFile;
+	myFile.open(filename);
+
+	writeRandIntsToFile(myFile, elC, lower, upper);
 
 	return 0;
 }
@@ -34,7 +42,7 @@ int strToInt(char* str)
 	return num;
 }
 
-int parseArgs(int argc, char** argv, int& elC, char* filename)
+int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* filename);
 {
 	for (int i = 1; i < argc; ++i) {
 		if (argv[i][0] != '-') { //Filename
