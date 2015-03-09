@@ -28,7 +28,11 @@ int main(int argc, char** argv)
 }
 
 inline int randInt(int lower, int upper) {
-	return rand() % (upper - lower) + 1 + lower;
+	int range = upper - lower;
+	if (range == 0) {
+		return lower;
+	}
+	return ((int)rand() % range) + 1 + lower;
 }
 
 static inline void writeRandIntsToFile(std::ofstream& myFile, int elC, int lower, int upper) {
@@ -40,6 +44,9 @@ static inline void writeRandIntsToFile(std::ofstream& myFile, int elC, int lower
 
 bool isInt(char* str)
 {
+	if (*str == '-') {
+		++str;
+	}
 	while (*str != '\0') {
 		if (*str < '0' || *str > '9') {
 			return false;
@@ -52,10 +59,11 @@ bool isInt(char* str)
 int strToInt(char* str) 
 {
 	int num = 0;
+	int sign = (*str == '-') ? -1 + (*(++str) * 0) : 1; // <= horryfying but cool at the same time
 	for ( ; *str >= '0' && *str <= '9'; ++str) {
 		num = num*10 + (*str - '0');
 	}
-	return num;
+	return num * sign;
 }
 
 static inline int getNextArgToInt(char arg, int& myVar, int& iterator, int argc, char** argv, int& flag);
