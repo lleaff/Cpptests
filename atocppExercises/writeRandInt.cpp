@@ -7,6 +7,7 @@
 static int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* filename);
 static inline void writeRandIntsToFile(std::ofstream& myFile, int elC, int lower, int upper);
 
+//Usage: writeRandInt {filename} -n {numberOfInts} -l {lowerBound} -u {upperBound}
 int main(int argc, char** argv)
 {
 	int elC = 100; // Default number of elements to write
