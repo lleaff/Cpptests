@@ -21,8 +21,8 @@ int main(int argc, char** argv)
 
 	std::ofstream myFile;
 	myFile.open(filename);
-
 	writeRandIntsToFile(myFile, elC, lower, upper);
+	myFile.close();
 
 	return 0;
 }
