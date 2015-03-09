@@ -77,6 +77,7 @@ static int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, ch
 							break;
 						case 'u':
 							getNextArgToInt('u', upper, i, argc, argv, newargseries);
+							break;
 						default:
 							std::cerr << "error: '" << argv[i][j] << "' unrecognized argument." << std::endl;
 							break;
