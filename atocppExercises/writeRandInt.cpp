@@ -1,9 +1,11 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <string.h> //strcpy()
+#include <stdlib.h> //rand()
+#include <time.h> //time()
 
-int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* filename);
-void writeRandIntsToFile(std::ofstream myFile, int elC, int lower, int upper);
+static int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* filename);
+static inline void writeRandIntsToFile(std::ofstream& myFile, int elC, int lower, int upper);
 
 int main(int argc, char** argv)
 {
@@ -13,6 +15,10 @@ int main(int argc, char** argv)
 	char filename[MAXFILENAMESIZE];
 	parseArgs(argc, argv, elC, lower, upper, filename);
 
+#ifdef DEBUG
+	std::cerr << "elc=" << elC << "  lo=" << lower << "  up=" << upper << "\nfilename=" << filename << "\n";//DEBUG
+#endif /* DEBUG */
+
 	std::ofstream myFile;
 	myFile.open(filename);
 
@@ -21,6 +27,16 @@ int main(int argc, char** argv)
 	return 0;
 }
 
+inline int randInt(int lower, int upper) {
+	return rand() % (upper - lower) + 1 + lower;
+}
+
+static inline void writeRandIntsToFile(std::ofstream& myFile, int elC, int lower, int upper) {
+	srand(time(NULL));
+	while (--elC >= 0) {
+		myFile << randInt(lower, upper) << "\n";
+	}
+}
 
 bool isInt(char* str)
 {
@@ -44,7 +60,7 @@ int strToInt(char* str)
 
 static inline int getNextArgToInt(char arg, int& myVar, int& iterator, int argc, char** argv, int& flag);
 
-int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* filename)
+static int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* filename)
 {
 	for (int i = 1; i < argc; ++i) {
 		if (argv[i][0] != '-') { //Filename
@@ -73,7 +89,6 @@ int parseArgs(int argc, char** argv, int& elC, int& lower, int& upper, char* fil
 	}
 	return argc - 1;
 }
-
 
 static inline int getNextArgToInt(char arg, int& myVar, int& iterator, int argc, char** argv, int& flag) {
 	if (++iterator >= argc) {
