@@ -1,4 +1,7 @@
+#Binaries
 *.exe
+*.out
+*.o
 
 #Vim temp files
 *.swp
