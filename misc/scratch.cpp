@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <math.h>
 
 class Point
@@ -17,10 +16,10 @@ class Point
 			y = yCor;
 		}
 
-		friend std::iostream operator<<(std::iostream strm, Point pt);
+		friend std::iostream& operator<<(std::iostream& strm, Point& pt);
 };
 
-std::iostream operator<<(std::iostream strm, Point pt)
+std::ostream& operator<<(std::ostream& strm, Point& pt)
 {
 	strm << pt.x << ", " << pt.y;
 	return strm;
@@ -52,9 +51,10 @@ class Rectangle
 		friend std::fstream operator<<(std::fstream strm, Rectangle rect);
 };
 
-std::fstream operator<<(std::fstream strm, Rectangle rect)
+std::ostream& operator<<(std::ostream& strm, Rectangle& rect)
 {
-	strm << "{(" << rect.topLeft << "), w: " << rect.width << "h: " << rect.height "}";
+	strm << "{(" << rect.topLeft << "), w:" 
+		<< rect.width << " h:" << rect.height << "}";
 	return strm;
 }
 
