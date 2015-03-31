@@ -29,13 +29,10 @@ int main(int argc, char **argv)
 void printFramedString(std::string str, char framech, std::ostream& outs)
 {
 	int strsize = str.size();
-	for (int i = 0; i < strsize + 4; ++i) {
-		outs << framech;
-	}
-	outs << '\n';
+	outs << std::string(strsize + 4, framech) << '\n';
+	outs << framech << std::string(strsize + 2, ' ') << framech << '\n';
 	outs << framech << ' ' << str << ' ' << framech << '\n';
-	for (int i = 0; i < strsize + 4; ++i) {
-		outs << framech;
-	}
+	outs << framech << std::string(strsize + 2, ' ') << framech << '\n';
+	outs << std::string(strsize + 4, framech) << '\n';
 	outs << std::endl;
 }
