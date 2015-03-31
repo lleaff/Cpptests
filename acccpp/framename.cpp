@@ -19,9 +19,9 @@ int main(int argc, char **argv)
 		}
 	}
 
-	std::cout << "Name: " << myName << std::endl;
-
 	printFramedString(myName);
+
+	printFramedString(myName, '\'');
 
 	return 0;
 }
@@ -29,7 +29,13 @@ int main(int argc, char **argv)
 void printFramedString(std::string str, char framech, std::ostream& outs)
 {
 	int strsize = str.size();
-	for (strsize) {
-	outs << framech;
+	for (int i = 0; i < strsize + 4; ++i) {
+		outs << framech;
 	}
+	outs << '\n';
+	outs << framech << ' ' << str << ' ' << framech << '\n';
+	for (int i = 0; i < strsize + 4; ++i) {
+		outs << framech;
+	}
+	outs << std::endl;
 }
