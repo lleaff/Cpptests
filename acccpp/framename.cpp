@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-void printFramedString(std::string str, char framech = '*', std::ostream& outs = std::cout);
+void printFramedString(std::string str, char framech = '*', int padding = 1, std::ostream& outs = std::cout);
 
 int main(int argc, char **argv)
 {
@@ -23,16 +23,18 @@ int main(int argc, char **argv)
 
 	printFramedString(myName, '\'');
 
+	printFramedString(myName, '$', 5);
+
 	return 0;
 }
 
-void printFramedString(std::string str, char framech, std::ostream& outs)
+void printFramedString(std::string str, char framech, int padding, std::ostream& outs)
 {
 	int strsize = str.size();
-	outs << std::string(strsize + 4, framech) << '\n';
-	outs << framech << std::string(strsize + 2, ' ') << framech << '\n';
-	outs << framech << ' ' << str << ' ' << framech << '\n';
-	outs << framech << std::string(strsize + 2, ' ') << framech << '\n';
-	outs << std::string(strsize + 4, framech) << '\n';
+	outs << std::string(strsize + padding*2 + 2, framech) << '\n';
+	outs << framech << std::string(strsize + padding*2, ' ') << framech << '\n';
+	outs << framech << std::string(padding, ' ') << str << std::string(padding, ' ') << framech << '\n';
+	outs << framech << std::string(strsize + padding*2, ' ') << framech << '\n';
+	outs << std::string(strsize + padding*2 + 2, framech) << '\n';
 	outs << std::endl;
 }
