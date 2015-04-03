@@ -1,6 +1,15 @@
 #include <iostream>
 #include <cstdlib>
 
+const char programName[] = "./fullNameReverser";
+#define MAXNAMELENGTH 50
+const char testStr[][MAXNAMELENGTH] = {
+	  "Iz Mael Chiki Tak"
+	, "MERLIN Paul"
+	, "JACKELINE SHAZBOT"
+	, "Bertrand LEBLANC DeSonNom"
+};
+
 bool isInt(char *cstr)
 {
 	while (*cstr == ' ' || *cstr == '\t' || *cstr == '-') {
@@ -34,7 +43,10 @@ int main(int argc, char** argv)
 #define DEFAULTTESTCOUNT 5
 	int testC = argc > 1 && isInt(argv[1])? DEFAULTTESTCOUNT : toInt(argv[1]);
 
-	for (int i = 0; i < testC; ++i) {
+	std::string testCall = programName;
 
+	for (int i = 0; i < testC; ++i) {
+		testCall.append(testStr[i]);
+		system(testCall.data());
 	}
 }
