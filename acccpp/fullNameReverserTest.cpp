@@ -33,7 +33,7 @@ int toInt(char *cstr)
 	}
 	int num = 0;
 	while (*cstr != '\0') {
-		num = num*10 + (*cstr - '0');
+		num = num*10 + (*cstr++ - '0');
 	}
 	return num;
 }
