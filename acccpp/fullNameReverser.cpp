@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-int processArgs(int& argc, char**& argv, char* arguments[])
+int processArgs(int& argc, char**& argv, char* arguments[]);
 std::string getName(std::istream& stream = std::cin);
 bool isLastName(std::string name);
 bool isUppercase(std::string str);
