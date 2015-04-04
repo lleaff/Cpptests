@@ -35,16 +35,18 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-int processArgs(int& argc, char**& argv, char* arguments[])
+// Returns the number of regular arguments
+int processArgs(const int& argc, const char**& argv, char* arguments[])
 {
 	int options = 0;
 	for (int i = 1; i < argc; ++i) {
 		if (argv[0][0] == '-') {
 			++options;
 		} else {
-			arguments[i - options] = argv[i];
+			strcpy(arguments[i - options], argv[i]);
 		}
 	}
+	return argc - options;
 }
 
 bool isUppercase(std::string str)
