@@ -41,7 +41,7 @@ int toInt(char *cstr)
 int main(int argc, char** argv)
 {
 #define DEFAULTTESTCOUNT 5
-	int testC = argc > 1 && isInt(argv[1])? DEFAULTTESTCOUNT : toInt(argv[1]);
+	int testC = argc > 1 && isInt(argv[1])? toInt(argv[1]) : DEFAULTTESTCOUNT;
 
 	std::string testCall = programName;
 
