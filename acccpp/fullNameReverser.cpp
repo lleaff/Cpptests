@@ -9,26 +9,27 @@ bool isUppercase(std::string str);
 
 class Person {
 	private:
+	public:
 		std::string firstName;
 		std::string lastName;
-	public:
 };
 
 
 int main(int argc, char** argv)
 {
+	Person myPerson;
+
 	char* names[argc - 1];
 	int arguments = processArgs(&argc, argv, names);
 
-	std::string firstName, lastName;
 	if (arguments < 2) {
 		std::cout << "Please input first name:\n" << "> ";
-		firstName = getName();
+		myPerson.firstName = getName();
 	} else {
 		if (arguments < 3) {
-			firstName = argv[1];
+			myPerson.firstName = argv[1];
 			std::cout << "Please input last name:\n" << "> ";
-			lastName = getName();
+			myPerson.lastName = getName();
 		} else {
 
 		}
@@ -69,4 +70,4 @@ std::string getName(std::istream& stream) {
 	std::string returnStr;
 	std::getline(stream, returnStr);
 	return returnStr;
-}
+} 
