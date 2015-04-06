@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
+#include <string.h> // strcpy()
 
-int processArgs(int& argc, char**& argv, char* arguments[]);
+int processArgs(int* const argc, char** const argv, char* arguments[]);
 std::string getName(std::istream& stream = std::cin);
 bool isLastName(std::string name);
 bool isUppercase(std::string str);
@@ -17,7 +18,7 @@ class Person {
 int main(int argc, char** argv)
 {
 	char* names[argc - 1];
-	int arguments = processArgs(argc, argv, names);
+	int arguments = processArgs(&argc, argv, names);
 
 	std::string firstName, lastName;
 	if (arguments < 2) {
@@ -36,17 +37,17 @@ int main(int argc, char** argv)
 }
 
 // Returns the number of regular arguments
-int processArgs(const int& argc, const char**& argv, char* arguments[])
+int processArgs(int* const argc, char** const argv, char* arguments[])
 {
 	int options = 0;
-	for (int i = 1; i < argc; ++i) {
+	for (int i = 1; i < *argc; ++i) {
 		if (argv[0][0] == '-') {
 			++options;
 		} else {
 			strcpy(arguments[i - options], argv[i]);
 		}
 	}
-	return argc - options;
+	return *argc - options;
 }
 
 bool isUppercase(std::string str)
