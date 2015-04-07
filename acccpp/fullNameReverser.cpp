@@ -2,7 +2,11 @@
 #include <string>
 #include <string.h> // strcpy()
 
-int processArgs(int* const argc, char** const argv, char* arguments[]);
+#define OPTIONSC 5
+#define MAXOPTIONNAMELENGTH 20
+
+int processArgs(int* const argc, char** const argv, char* arguments[], 
+		bool* flags, char optionsNames[][MAXOPTIONNAMELENGTH]);
 std::string getName(std::istream& stream = std::cin);
 bool isLastName(std::string name);
 bool isUppercase(std::string str);
@@ -19,8 +23,15 @@ int main(int argc, char** argv)
 {
 	Person myPerson;
 
+	bool options[OPTIONSC];
+	char optionsNames[OPTIONSC][MAXOPTIONNAMELENGTH] = {
+		"print",
+		"firstname",
+		"lastname"
+	};
+
 	char* names[argc - 1];
-	int arguments = processArgs(&argc, argv, names);
+	int arguments = processArgs(&argc, argv, names, options, optionsNames);
 
 	if (arguments < 2) {
 		std::cout << "Please input first name:\n" << "> ";
@@ -37,13 +48,21 @@ int main(int argc, char** argv)
 	return 0;
 }
 
+
+int processOption(bool flags[], int optionsC)
+{
+	flags;
+}
+
 // Returns the number of regular arguments
-int processArgs(int* const argc, char** const argv, char* arguments[])
+int processArgs(int* const argc, char** const argv, char* arguments[], 
+		bool* flags, char optionsNames[][MAXOPTIONNAMELENGTH])
 {
 	int options = 0;
 	for (int i = 1; i < *argc; ++i) {
 		if (argv[0][0] == '-') {
 			++options;
+			flags[processOption(flags, options)] = true;
 		} else {
 			strcpy(arguments[i - options], argv[i]);
 		}
