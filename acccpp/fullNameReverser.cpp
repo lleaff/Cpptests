@@ -54,7 +54,7 @@ int processOption(int* const argc, char** const argv, bool flags[], int optionsC
 	flags;
 }
 
-// Returns the number of regular arguments
+// Return value is the number of regular arguments
 int processArgs(int* const argc, char** const argv, char* arguments[], 
 		bool* flags, char optionsNames[][MAXOPTIONNAMELENGTH])
 {
