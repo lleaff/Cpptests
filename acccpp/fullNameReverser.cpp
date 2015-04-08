@@ -49,9 +49,9 @@ int main(int argc, char** argv)
 }
 
 
-int processOption(int* const argc, char** const argv, bool flags[], int optionsC)
+int processOption(int* const argc, char** const argv, int optionsC, bool flags[], char optionsNames[][MAXOPTIONNAMELENGTH])
 {
-	flags;
+
 }
 
 // Return value is the number of regular arguments
@@ -62,7 +62,7 @@ int processArgs(int* const argc, char** const argv, char* arguments[],
 	for (int i = 1; i < *argc; ++i) {
 		if (argv[0][0] == '-') {
 			++options;
-			flags[processOption(argc, argv, flags, options)] = true;
+			flags[processOption(argc, argv, options, flags, optionsNames)] = true;
 		} else {
 			strcpy(arguments[i - options], argv[i]);
 		}
