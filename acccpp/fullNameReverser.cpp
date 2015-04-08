@@ -49,7 +49,7 @@ int main(int argc, char** argv)
 }
 
 
-int processOption(bool flags[], int optionsC)
+int processOption(int* const argc, char** const argv, bool flags[], int optionsC)
 {
 	flags;
 }
@@ -62,7 +62,7 @@ int processArgs(int* const argc, char** const argv, char* arguments[],
 	for (int i = 1; i < *argc; ++i) {
 		if (argv[0][0] == '-') {
 			++options;
-			flags[processOption(flags, options)] = true;
+			flags[processOption(argc, argv, flags, options)] = true;
 		} else {
 			strcpy(arguments[i - options], argv[i]);
 		}
