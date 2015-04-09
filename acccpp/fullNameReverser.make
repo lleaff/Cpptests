@@ -1,9 +1,10 @@
-CC=g++
+CXX=g++
+FLAGS=-g
 
 all: fullNameReverser fullNameReverserTest
 
 fullNameReverser:
-	$CC fullNameReverser.cpp -o fullNameReverser
+	$(CXX) $(FLAGS) $(CXXFLAGS) fullNameReverser.cpp -o $@
 
 fullNameReverserTest:
-	$CC fullNameReverserTest.cpp -o fullNameReverserTest
+	$(CXX) $(FLAGS) $(CXXFLAGS) fullNameReverserTest.cpp -o $@

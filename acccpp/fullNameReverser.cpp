@@ -1,33 +1,46 @@
 #include <iostream>
 #include <string>
+#include <string.h> // strcpy()
 
-int processArgs(int& argc, char**& argv, char* arguments[]);
+#define OPTIONSC 5
+#define MAXOPTIONNAMELENGTH 20
+
+int processArgs(int* const argc, char** const argv, char* arguments[], 
+		bool* flags, char optionsNames[][MAXOPTIONNAMELENGTH]);
 std::string getName(std::istream& stream = std::cin);
 bool isLastName(std::string name);
 bool isUppercase(std::string str);
 
 class Person {
 	private:
+	public:
 		std::string firstName;
 		std::string lastName;
-	public:
 };
 
 
 int main(int argc, char** argv)
 {
-	char* names[argc - 1];
-	int arguments = processArgs(argc, argv, names);
+	Person myPerson;
 
-	std::string firstName, lastName;
+	bool options[OPTIONSC];
+	char optionsNames[OPTIONSC][MAXOPTIONNAMELENGTH] = {
+		"print",
+		"firstname",
+		"lastname"
+	};
+
+	char* names[argc - 1];
+	int arguments = processArgs(&argc, argv, names, options, optionsNames);
+
 	if (arguments < 2) {
 		std::cout << "Please input first name:\n" << "> ";
-		firstName = getName();
+		myPerson.firstName = getName();
 	} else {
 		if (arguments < 3) {
-			firstName = argv[1];
+			myPerson.firstName = argv[1];
 			std::cout << "Please input last name:\n" << "> ";
-			lastName = getName();
+			myPerson.lastName = getName();
 		} else {
 
 		}
@@ -35,18 +48,30 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-// Returns the number of regular arguments
-int processArgs(const int& argc, const char**& argv, char* arguments[])
+
+int processOption(int* const argc, char* argv, int optionsC, bool flags[], char optionsNames[][MAXOPTIONNAMELENGTH], char optionsLetters[])
+{
+	for (int i = 0; argv[i] != '\0'; ++i) {
+		switch (argv[i]) {
+
+		}
+	}
+}
+
+// Return value is the number of regular arguments
+int processArgs(int* const argc, char** argv, char* arguments[], 
+		bool* flags, char optionsNames[][MAXOPTIONNAMELENGTH], char optionsLetters[])
 {
 	int options = 0;
-	for (int i = 1; i < argc; ++i) {
-		if (argv[0][0] == '-') {
+	for (int i = 1; i < *argc; ++i, ++argv) {
+		if (*argv[0] == '-') {
 			++options;
+			flags[processOption(argc, *argv, options, flags, optionsNames, optionsLetters)] = true;
 		} else {
 			strcpy(arguments[i - options], argv[i]);
 		}
 	}
-	return argc - options;
+	return *argc - options;
 }
 
 bool isUppercase(std::string str)
@@ -68,4 +93,4 @@ std::string getName(std::istream& stream) {
 	std::string returnStr;
 	std::getline(stream, returnStr);
 	return returnStr;
-}
+} 
