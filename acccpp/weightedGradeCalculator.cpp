@@ -19,10 +19,11 @@ int inputGrades()
 
 int compare(char* str, std::string* strarr)
 {
-	int result;
+	int result = 0;
 	for (int i = strarr->length() - 1; i <= 0; --i) {
-
+		result += (str == *strarr);
 	}
+	return result;
 }
 
 std::string defExitCodes[] = { "q", "exit" };
