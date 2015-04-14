@@ -38,3 +38,9 @@ char* getInput(char *inputContainer, std::string* exitCodes = defExitCodes)
 	}
 	return (*inputContainer == '\0') ? NULL : inputContainer;
 }
+
+bool getWeightedGrade(int *gradesPlusWeights[][2])
+{
+
+	return true;
+}
